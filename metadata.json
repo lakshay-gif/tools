@@ -1,0 +1,6 @@
+{
+  "name": "ToolsHub – 100% Client-Side Privacy-First Tools",
+  "description": "Free, privacy-first online tools that process 100% in your browser. Merge PDFs, split pages, convert images, sign forms, and edit documents with zero file uploads.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

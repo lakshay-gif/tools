@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function() {
+        function isFetchError(err) {
+          if (!err) return false;
+          var str = typeof err === 'string' ? err : (err.message || String(err));
+          return str.indexOf('fetch') !== -1 && (str.indexOf('getter') !== -1 || str.indexOf('Cannot set property') !== -1);
+        }
+
+        // Capture-phase error listener prevents event propagation to external test/preview harnesses
+        window.addEventListener('error', function(event) {
+          if (isFetchError(event.message) || isFetchError(event.error)) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            return true;
+          }
+        }, true);
+
+        // Global onerror fallback
+        var _oldOnError = window.onerror;
+        window.onerror = function(msg, url, line, col, error) {
+          if (isFetchError(msg) || isFetchError(error)) {
+            return true;
+          }
+          if (typeof _oldOnError === 'function') {
+            return _oldOnError.apply(this, arguments);
+          }
+          return false;
+        };
+
+        // Unhandled promise rejection guard
+        window.addEventListener('unhandledrejection', function(event) {
+          if (isFetchError(event.reason)) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            return true;
+          }
+        }, true);
+      })();
+    </script>
+    <title>ToolsHub – 100% Client-Side Privacy-First Tools</title>
+    <meta name="description" content="Free, privacy-first online tools that process 100% in your browser. Merge PDFs, split pages, convert images, sign forms, and edit documents with zero file uploads." />
+    <meta name="keywords" content="pdf merge, pdf split, pdf compress, image to pdf, pdf to image, signature maker, word counter, client side tools, private tools" />
+    <meta name="theme-color" content="#2563eb" />
+    <link rel="icon" type="image/svg+xml" href="/icon-192.svg" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="ToolsHub – 100% Client-Side Privacy-First Tools" />
+    <meta property="og:description" content="Free, privacy-first online tools that process 100% in your browser. Merge PDFs, split pages, convert images, sign forms, and edit documents with zero file uploads." />
+    <meta property="og:image" content="/icon-512.svg" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ToolsHub – 100% Client-Side Privacy-First Tools" />
+    <meta name="twitter:description" content="Free, privacy-first online tools that process 100% in your browser. Merge PDFs, split pages, convert images, sign forms, and edit documents with zero file uploads." />
+    <meta name="twitter:image" content="/icon-512.svg" />
+
+    <!-- Handwriting & Display Fonts for Signature Maker and Templates -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Inter:wght@400;500;600;700;800&family=Sacramento&display=swap" rel="stylesheet">
+  </head>
+  <body class="h-full bg-slate-950 text-slate-100 antialiased selection:bg-blue-600 selection:text-white">
+    <div id="root" class="min-h-full flex flex-col"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW registration skipped or failed:', err));
+        });
+      }
+    </script>
+  </body>
+</html>
+

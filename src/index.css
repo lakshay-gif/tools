@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .font-caveat {
+    font-family: 'Caveat', cursive, sans-serif;
+  }
+  .font-dancing {
+    font-family: 'Dancing Script', cursive, sans-serif;
+  }
+  .font-greatvibes {
+    font-family: 'Great Vibes', cursive, sans-serif;
+  }
+  .font-sacramento {
+    font-family: 'Sacramento', cursive, sans-serif;
+  }
+}
+
+@media print {
+  body {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .print-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+  @page {
+    margin: 15mm;
+  }
+}

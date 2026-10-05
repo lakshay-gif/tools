@@ -1,0 +1,22 @@
+{
+  "short_name": "ToolsHub",
+  "name": "ToolsHub – 100% Client-Side Web Tools",
+  "description": "Privacy-first PDF and document tools running 100% in your browser. Zero server uploads.",
+  "icons": [
+    {
+      "src": "/icon-192.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icon-512.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#090d16",
+  "theme_color": "#2563eb",
+  "display": "standalone",
+  "orientation": "portrait"
+}
